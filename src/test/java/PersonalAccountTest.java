@@ -1,7 +1,11 @@
 import PageObject.PageObject;
+import com.UserOperations;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
@@ -9,38 +13,47 @@ import static org.junit.Assert.assertTrue;
 
 public class PersonalAccountTest {
 
-//    @Before
-//    public void setup(){
-//        System.setProperty("webdriver.chrome.driver", "src/resources/yandexdriver.exe");
-//    }
+    UserOperations user = new UserOperations();
+
+    @Before
+    public void setup(){
+        System.setProperty("webdriver.chrome.driver", "src/resources/yandexdriver.exe");
+    }
 
     @After
     public void tearDown() {
         closeWebDriver();
+        user.delete();
     }
 
     @Test
-    public void transferToPersonalAccountTest(){
+    @DisplayName("Переход в конструктор из личного кабинета")
+    public void transitionToConstructorTest(){
+        Map<String, String> data = user.register();
+
         final boolean isOrderButtonVisible = open(PageObject.BASE_URL, PageObject.class)
                 .logInAccount()
-                .sendEmailOnEnterPage("komiguy@yandex.ru")
-                .sendPassword("12345678")
+                .sendEmailOnEnterPage(data.get("email"))
+                .sendPassword(data.get("password"))
                 .clickEnter()
                 .clickPersonalAccount()
                 .transitToConstructor()
                 .clickPersonalAccount()
                 .transitToStellar()
-                .isOrderButtonVisible();;
+                .isOrderButtonVisible();
 
         assertTrue(isOrderButtonVisible);
     }
 
     @Test
+    @DisplayName("Выход из личного кабинета")
     public void exitFromPersonalAccountTest(){
+        Map<String, String> data = user.register();
+
         final boolean exitFrom = open(PageObject.BASE_URL, PageObject.class)
                 .logInAccount()
-                .sendEmailOnEnterPage("komiguy@yandex.ru")
-                .sendPassword("12345678")
+                .sendEmailOnEnterPage(data.get("email"))
+                .sendPassword(data.get("password"))
                 .clickEnter()
                 .clickPersonalAccount()
                 .exitButtonClick()
