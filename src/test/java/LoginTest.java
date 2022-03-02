@@ -10,10 +10,10 @@ import static org.junit.Assert.assertTrue;
 
 public class LoginTest {
 
-    @Before
-    public void setup(){
-        System.setProperty("webdriver.chrome.driver", "src/resources/yandexdriver.exe");
-    }
+//    @Before
+//    public void setup(){
+//        System.setProperty("webdriver.chrome.driver", "src/resources/yandexdriver.exe");
+//    }
 
     @After
     public void tearDown() {

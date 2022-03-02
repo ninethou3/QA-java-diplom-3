@@ -79,55 +79,48 @@ public class PageObject {
 
     @Step("Клик на кнопку Личный кабинет")
     public PageObject clickPersonalAccount(){
-        personalAccount.click();
-        Selenide.sleep(5000);
+        personalAccount.shouldBe(enabled).click();
         return this;
     }
     @Step("Ввод имени")
     public PageObject setName(String name){
         namePlace.setValue(name);
-        Selenide.sleep(5000);
         return this;
     }
     @Step("Ввод емейла")
     public PageObject sendEmail(String email){
-//        emailPlace.shouldBe(exist);
         emailPlace.setValue(email);
-        Selenide.sleep(5000);
         return this;
     }
     @Step("Ввод емейла на стринце входа в аккаунт")
     public PageObject sendEmailOnEnterPage(String email){
-//        emailPlaceOnEnterPage.shouldBe(exist);
         emailPlaceOnEnterPage.setValue(email);
-        Selenide.sleep(5000);
         return this;
     }
     @Step("Ввод пароля")
     public PageObject sendPassword(String pass){
-//        password.shouldBe(exist);
         password.setValue(pass);
-        Selenide.sleep(5000);
         return this;
     }
     @Step("Нажать на кнопку регистрации")
     public PageObject clickRegister(){
-        registrationButton.click();
-        Selenide.sleep(5000);
+        registrationButton.shouldBe(enabled).click();
         return this;
     }
     @Step("Проверка что кнопка входа видна")
     public boolean getEnter(){
+        enterButton.shouldBe(enabled);
         return enterButton.is(visible);
     }
     @Step("Нажать Ентер")
     public PageObject clickEnter(){
+        enterButton.shouldBe(enabled);
         enterButton.click();
-        Selenide.sleep(5000);
         return this;
     }
     @Step("Кнопка заказа видна")
     public boolean isOrderButtonVisible(){
+        orderButton.shouldBe(enabled);
         return orderButton.is(visible);
     }
     @Step("Сообще об ошибке регстрации видна")
@@ -136,26 +129,26 @@ public class PageObject {
     }
     @Step("Входа в аккаунт")
     public PageObject logInAccount(){
+        logInAccount.shouldBe(enabled);
         logInAccount.click();
-        Selenide.sleep(5000);
         return this;
     }
     @Step("Вход через форму регистрации")
     public PageObject logInRegistrationForm(){
+        logInRegistrationForm.shouldBe(enabled);
         logInRegistrationForm.click();
-        Selenide.sleep(5000);
         return this;
     }
 
     public PageObject logInRegistrationFormByLink(){
+        registrationButtonLink.shouldBe(enabled);
         registrationButtonLink.click();
-        Selenide.sleep(5000);
         return this;
     }
     @Step("Нажатие на ссылку Забыл пароль")
     public PageObject logInForgotPasswordLink(){
+        forgotPasswordLink.shouldBe(enabled);
         forgotPasswordLink.click();
-        Selenide.sleep(5000);
         return this;
     }
     public boolean accountText(){
@@ -163,32 +156,35 @@ public class PageObject {
         return accountText.is(visible);
     }
     public PageObject exitButtonClick(){
+        exitButton.shouldBe(enabled);
         exitButton.click();
-        Selenide.sleep(5000);
         return this;
     }
 
     public PageObject transitToConstructor(){
+        constructor.shouldBe(enabled);
         constructor.click();
         Selenide.sleep(5000);
         return this;
     }
     public PageObject transitToStellar(){
+        stellar.shouldBe(enabled);
         stellar.click();
         Selenide.sleep(5000);
         return this;
     }
     public PageObject bunsClick(){
+        buns.shouldBe(enabled);
         buns.click();
-        Selenide.sleep(5000);
         return this;
     }
     public PageObject sousesClick(){
+        souses.shouldBe(enabled);
         souses.click();
-        Selenide.sleep(5000);
         return this;
     }
     public boolean fillsClick(){
+        fills.shouldBe(enabled);
         fills.click();
         return fillsMeat.is(visible);
     }
