@@ -14,10 +14,12 @@ import static org.junit.Assert.assertTrue;
 public class LoginTest {
 
     UserOperations user = new UserOperations();
+    Map<String, String> data;
 
     @Before
     public void setup(){
         System.setProperty("webdriver.chrome.driver", "src/resources/yandexdriver.exe");
+        data = user.register();
     }
 
     @After
@@ -29,7 +31,6 @@ public class LoginTest {
     @Test
     @DisplayName("Тест входа через кнопку личный кабинет")
     public void logInPersonalAccountTest(){
-        Map<String, String> data = user.register();
 
         final boolean isOrderButtonVisible = open(PageObject.BASE_URL, PageObject.class)
                 .clickPersonalAccount()
@@ -44,7 +45,6 @@ public class LoginTest {
     @Test
     @DisplayName("Тест логина через кнопку Войти в аккаунт на главной странице")
     public void logInAccountOnMainPageTest(){
-        Map<String, String> data = user.register();
 
         final boolean isOrderButtonVisible = open(PageObject.BASE_URL, PageObject.class)
                 .logInAccount()
@@ -59,7 +59,8 @@ public class LoginTest {
     @Test
     @DisplayName("Тест входа через форму регстрации")
     public void logInTroughRegistrationFormTest(){
-        Map<String, String> data = user.register();
+
+
 
         final boolean isOrderButtonVisible = open(PageObject.BASE_URL, PageObject.class)
                 .logInAccount()

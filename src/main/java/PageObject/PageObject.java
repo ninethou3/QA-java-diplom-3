@@ -111,6 +111,7 @@ public class PageObject {
     }
     @Step("Проверка что кнопка входа видна")
     public boolean getEnter(){
+        enterButton.shouldBe(enabled);
         return enterButton.is(visible);
     }
     @Step("Нажать Ентер")
@@ -157,8 +158,8 @@ public class PageObject {
         return accountText.is(visible);
     }
     public PageObject exitButtonClick(){
+        exitButton.shouldBe(enabled);
         exitButton.click();
-        Selenide.sleep(5000);
         return this;
     }
 

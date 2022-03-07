@@ -14,10 +14,12 @@ import static org.junit.Assert.assertTrue;
 public class PersonalAccountTest {
 
     UserOperations user = new UserOperations();
+    Map<String, String> data;
 
     @Before
     public void setup(){
         System.setProperty("webdriver.chrome.driver", "src/resources/yandexdriver.exe");
+        data = user.register();
     }
 
     @After
@@ -29,7 +31,6 @@ public class PersonalAccountTest {
     @Test
     @DisplayName("Переход в конструктор из личного кабинета")
     public void transitionToConstructorTest(){
-        Map<String, String> data = user.register();
 
         final boolean isOrderButtonVisible = open(PageObject.BASE_URL, PageObject.class)
                 .logInAccount()
@@ -48,7 +49,6 @@ public class PersonalAccountTest {
     @Test
     @DisplayName("Выход из личного кабинета")
     public void exitFromPersonalAccountTest(){
-        Map<String, String> data = user.register();
 
         final boolean exitFrom = open(PageObject.BASE_URL, PageObject.class)
                 .logInAccount()
