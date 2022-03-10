@@ -1,4 +1,5 @@
-import PageObject.PageObject;
+import PageObject.MainPage;
+import PageObject.LoginPage;
 import com.UserOperations;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
@@ -7,8 +8,7 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
 public class LoginTest {
@@ -32,11 +32,13 @@ public class LoginTest {
     @DisplayName("Тест входа через кнопку личный кабинет")
     public void logInPersonalAccountTest(){
 
-        final boolean isOrderButtonVisible = open(PageObject.BASE_URL, PageObject.class)
-                .clickPersonalAccount()
+        open(MainPage.BASE_URL, MainPage.class)
+                .clickPersonalAccount();
+        page(LoginPage.class)
                 .sendEmailOnEnterPage(data.get("email"))
                 .sendPassword(data.get("password"))
-                .clickEnter()
+                .clickEnter();
+        final boolean isOrderButtonVisible = page(MainPage.class)
                 .isOrderButtonVisible();
 
         assertTrue(isOrderButtonVisible);
@@ -46,11 +48,13 @@ public class LoginTest {
     @DisplayName("Тест логина через кнопку Войти в аккаунт на главной странице")
     public void logInAccountOnMainPageTest(){
 
-        final boolean isOrderButtonVisible = open(PageObject.BASE_URL, PageObject.class)
-                .logInAccount()
+        open(MainPage.BASE_URL, MainPage.class)
+                .logInAccount();
+        page(LoginPage.class)
                 .sendEmailOnEnterPage(data.get("email"))
                 .sendPassword(data.get("password"))
-                .clickEnter()
+                .clickEnter();
+        final boolean isOrderButtonVisible = page(MainPage.class)
                 .isOrderButtonVisible();
 
         assertTrue(isOrderButtonVisible);
@@ -60,15 +64,15 @@ public class LoginTest {
     @DisplayName("Тест входа через форму регстрации")
     public void logInTroughRegistrationFormTest(){
 
-
-
-        final boolean isOrderButtonVisible = open(PageObject.BASE_URL, PageObject.class)
-                .logInAccount()
+        open(MainPage.BASE_URL, MainPage.class)
+                .logInAccount();
+        page(LoginPage.class)
                 .logInForgotPasswordLink()
                 .logInRegistrationForm()
                 .sendEmailOnEnterPage(data.get("email"))
                 .sendPassword(data.get("password"))
-                .clickEnter()
+                .clickEnter();
+        final boolean isOrderButtonVisible = page(MainPage.class)
                 .isOrderButtonVisible();
 
         assertTrue(isOrderButtonVisible);

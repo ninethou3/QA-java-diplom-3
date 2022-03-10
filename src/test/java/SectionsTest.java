@@ -1,11 +1,11 @@
-import PageObject.PageObject;
+import PageObject.MainPage;
+import PageObject.LoginPage;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
 public class SectionsTest {
@@ -23,14 +23,17 @@ public class SectionsTest {
     @Test
     @DisplayName("Тест перехода из одного раздела конструктора в другой")
     public void sectionsTest(){
-        final boolean sections = open(PageObject.BASE_URL, PageObject.class)
-                .logInAccount()
+        open(MainPage.BASE_URL, MainPage.class)
+                .logInAccount();
+        page(LoginPage.class)
                 .sendEmailOnEnterPage("komiguy@yandex.ru")
                 .sendPassword("12345678")
-                .clickEnter()
+                .clickEnter();
+        page(MainPage.class)
                 .transitToStellar()
                 .sousesClick()
-                .bunsClick()
+                .bunsClick();
+        final boolean sections =  page(MainPage.class)
                 .fillsClick();
 
         assertTrue(sections);

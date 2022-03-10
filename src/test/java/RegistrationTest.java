@@ -1,12 +1,13 @@
-import PageObject.PageObject;
+import PageObject.RegisterPage;
+import PageObject.MainPage;
+import PageObject.LoginPage;
 import io.qameta.allure.junit4.DisplayName;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertTrue;
 
 public class RegistrationTest {
@@ -29,13 +30,16 @@ public class RegistrationTest {
     @DisplayName("Тест регистрации нового пользователя")
     public void registrationTest(){
 
-        final boolean isRegistered = open(PageObject.BASE_URL, PageObject.class)
-                .clickPersonalAccount()
-                .logInRegistrationFormByLink()
+        open(MainPage.BASE_URL, MainPage.class)
+                .clickPersonalAccount();
+        page(LoginPage.class)
+                .logInRegistrationFormByLink();
+        page(RegisterPage.class)
                 .setName(name)
                 .sendEmail(email)
                 .sendPassword(password)
-                .clickRegister()
+                .clickRegister();
+        final boolean isRegistered = page(LoginPage.class)
                 .getEnter();
 
         assertTrue(isRegistered);
@@ -44,13 +48,17 @@ public class RegistrationTest {
     @Test
     @DisplayName("Тест появления ошибки при некорректных регистрационных данных")
     public void registrationErrorTest(){
-        final boolean isRegisteredError = open(PageObject.BASE_URL, PageObject.class)
-                .clickPersonalAccount()
-                .logInRegistrationFormByLink()
+
+        open(MainPage.BASE_URL, MainPage.class)
+                .clickPersonalAccount();
+        page(LoginPage.class)
+                .logInRegistrationFormByLink();
+        page(RegisterPage.class)
                 .setName(name)
                 .sendEmail(email)
                 .sendPassword("123")
-                .clickRegister()
+                .clickRegister();
+        final boolean isRegisteredError = page(RegisterPage.class)
                 .registrationError();
 
         assertTrue(isRegisteredError);
